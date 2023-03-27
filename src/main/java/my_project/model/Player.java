@@ -20,8 +20,6 @@ public class Player extends InteractiveGraphicalObject {
     private boolean haa;
     private boolean haa2;
 
-    private boolean xr;
-
     public Player(double x, double y){
         this.x = x;
         this.y = y;
@@ -32,7 +30,6 @@ public class Player extends InteractiveGraphicalObject {
         height = 40;
         haa = false;
         haa2 = false;
-        xr = false;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
@@ -67,11 +64,6 @@ public class Player extends InteractiveGraphicalObject {
                 haa2 = false;
                 speed = 150;
             }
-        }
-
-        if (xr){
-            x = Math.random()*960;
-            xr = false;
         }
 
         //TODO 05 Überarbeiten Sie die Update-Methode derart, dass ein Player-Objekt nicht den Bildschirm verlassen kann und immer zu sehen ist.
@@ -113,5 +105,5 @@ public class Player extends InteractiveGraphicalObject {
         haa = true;
     }
 
-    public void randomx(){ xr = true;}
+    public void randomx(){ x = Math.random()*960;}
 }
