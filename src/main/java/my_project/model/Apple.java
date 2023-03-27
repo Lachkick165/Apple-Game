@@ -7,8 +7,8 @@ public class Apple extends Fruit {
 
     //Attribute
 
-    public Apple(double x, double y){
-        super(x, y);
+    public Apple(double x, double y, double speed){
+        super(x, y, speed);
         radius = 30;
     }
 

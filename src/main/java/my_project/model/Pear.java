@@ -6,13 +6,13 @@ import KAGO_framework.view.DrawTool;
 public class Pear extends GraphicalObject {
 
     //Attribute
-    private double speed;
+    public double speed;
     private double timer;
 
-    public Pear(double x, double y){
+    public Pear(double x, double y, double speed){
         this.x = x;
         this.y = y;
-        speed = 150;
+        this.speed = speed;
         width = 25;
         height = 35;
         timer = 0;

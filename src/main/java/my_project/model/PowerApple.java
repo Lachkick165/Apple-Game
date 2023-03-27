@@ -6,13 +6,23 @@ import java.awt.*;
 
 public class PowerApple extends Apple{
 
-    public PowerApple(double x, double y){
-        super(x, y);
+    public PowerApple(double x, double y, double speed){
+
+        super(x, y, speed);
     }
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(new Color(113, 132, 77));
-        drawTool.drawFilledCircle(x, y, 20);
+        drawTool.setCurrentColor(255,0,0,255);
+        drawTool.drawFilledCircle(x,y,radius);
+        drawTool.setCurrentColor(0,0,0,255);
+        drawTool.drawCircle(x,y,radius);
+        drawTool.setCurrentColor(new Color(82, 57, 26));
+        drawTool.drawFilledRectangle(x, y - 38, 4, 16);
+    }
+
+    public void jumpBack(){
+        y = -10;
+        x = Math.random()*1000;
     }
 }

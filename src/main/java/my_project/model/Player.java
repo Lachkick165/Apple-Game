@@ -10,24 +10,29 @@ public class Player extends InteractiveGraphicalObject {
 
 
     //Attribute
-    private double speed;
+    public double speed;
     private int points;
 
     //Tastennummern zur Steuerung
     private int keyToGoLeft;
     private int keyToGoRight;
     private int direction;
+    private boolean haa;
+    private boolean haa2;
+
+    private boolean xr;
 
     public Player(double x, double y){
         this.x = x;
         this.y = y;
 
-        //if (x > Config.WINDOW_WIDTH || x < Config.WINDOW_WIDTH-Config.WINDOW_WIDTH) {
-            speed = 150;
-        //}
+        speed = 150;
 
         width = 80;
         height = 40;
+        haa = false;
+        haa2 = false;
+        xr = false;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
@@ -44,6 +49,30 @@ public class Player extends InteractiveGraphicalObject {
 
     @Override
     public void update(double dt) {
+        if (haa) {
+            if (haa2 == false){
+                speed += 100*dt;
+            }
+
+            if (speed >= Math.random()*400 + 450){
+                haa2 = true;
+            }
+
+            if (haa2){
+                speed -= 100*dt;
+            }
+
+            if (speed <= 150){
+                haa = false;
+                haa2 = false;
+                speed = 150;
+            }
+        }
+
+        if (xr){
+            x = Math.random()*960;
+            xr = false;
+        }
 
         //TODO 05 Überarbeiten Sie die Update-Methode derart, dass ein Player-Objekt nicht den Bildschirm verlassen kann und immer zu sehen ist.
         if(direction == 0 && x < Config.WINDOW_WIDTH-width-18){
@@ -79,4 +108,10 @@ public class Player extends InteractiveGraphicalObject {
             direction = -1;
         }
     }
+
+    public void boost(){
+        haa = true;
+    }
+
+    public void randomx(){ xr = true;}
 }

@@ -4,12 +4,12 @@ import KAGO_framework.model.InteractiveGraphicalObject;
 
 public class Fruit extends InteractiveGraphicalObject {
 
-    protected double speed;
+    public double speed;
 
-    public Fruit(double x, double y){
+    public Fruit(double x, double y, double speed){
         this.x = x;
         this.y = y;
-        speed = 150;
+        this.speed = speed;
     }
 
     @Override
