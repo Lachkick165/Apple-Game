@@ -19,6 +19,7 @@ public class ProgramController {
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private Illustration illustration;
     private Player player;
+    private Player2 player2;
     Points points;
     private PowerApple powerApple01;
 
@@ -57,6 +58,10 @@ public class ProgramController {
         viewController.draw(player);
         viewController.register(player);
 
+        player2 = new Player2(300, Config.WINDOW_HEIGHT-100);
+        viewController.draw(player2);
+        viewController.register(player2);
+
         points = new Points(0);
         viewController.draw(points);
 
@@ -76,6 +81,7 @@ public class ProgramController {
             if(checkAndHandleCollision(p)){
                 p.jumpBack();
                 points.setPoints(points.getPoints()+1);
+                points.setMinusPointsboolean(points.isMinusPointsboolean()==false);
             }
         }
 
@@ -83,6 +89,7 @@ public class ProgramController {
             if(checkAndHandleCollision(a)){
                 a.jumpBack();
                 points.setPoints(points.getPoints()+1);
+                points.setMinusPointsboolean(points.isMinusPointsboolean()==false);
             }
         }
 
@@ -93,27 +100,31 @@ public class ProgramController {
 
         if (checkAndHandleCollision(illustration)){
             illustration.jumpBack2();
-            player.boost();
+            player.stop();
             player.randomx();
-            points.setPoints(points.getPoints()-1);
+            points.minusPoints();
         }
         //TODO 08 Nachdem Sie die TODOs 01-07 erledigt haben: Setzen Sie um, dass im Falle einer Kollision (siehe TODO 06 bzw. 07) zwischen dem Spieler und dem Apfel bzw. dem Spieler und der Birne, die jumpBack()-Methode von dem Apfel bzw. der Birne aufgerufen wird.
         //Weitere TODOs folgen und werden im Unterricht formuliert. Spätestens nach TODO 08 sollte der Aufbau des Projekts durchdacht werden.
     }
 
     public boolean checkAndHandleCollision(Apple a){
+
         return player.collidesWith(a);
     }
 
     public boolean checkAndHandleCollision(Pear p){
+
         return player.collidesWith(p);
     }
 
     public boolean checkAndHandleCollision(PowerApple pa){
+
         return player.collidesWith(pa);
     }
 
     public boolean checkAndHandleCollision(Illustration il){
+
         return player.collidesWith(il);
     }
 

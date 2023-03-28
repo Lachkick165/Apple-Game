@@ -4,21 +4,19 @@ import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.Config;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Player extends InteractiveGraphicalObject {
 
-
-    //Attribute
-    public double speed;
-    private int points;
-
-    //Tastennummern zur Steuerung
+    private double speed;
     private int keyToGoLeft;
     private int keyToGoRight;
     private int direction;
     private boolean haa;
     private boolean haa2;
+    private boolean stoptimer;
+    private double timer;
 
     public Player(double x, double y){
         this.x = x;
@@ -30,21 +28,23 @@ public class Player extends InteractiveGraphicalObject {
         height = 40;
         haa = false;
         haa2 = false;
+        stoptimer = false;
+        timer = 0;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
-        this.direction      = -1; //-1 keine Bewegung, 0 nach rechts, 2 nach links
+        this.direction      = -1;
     }
 
-    @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(157,152,3,255);
         drawTool.drawFilledRectangle(x,y,width,height);
         drawTool.setCurrentColor(0,0,0,255);
         drawTool.drawRectangle(x,y,width,height);
+        drawTool.setCurrentColor(Color.white);
+        drawTool.drawText(0, 20, "Speed "+ speed);
     }
 
-    @Override
     public void update(double dt) {
         if (haa) {
             if (haa2 == false){
@@ -65,23 +65,27 @@ public class Player extends InteractiveGraphicalObject {
                 speed = 150;
             }
         }
+        if (stoptimer){
+            timer += dt;
 
-        //TODO 05 Überarbeiten Sie die Update-Methode derart, dass ein Player-Objekt nicht den Bildschirm verlassen kann und immer zu sehen ist.
+            if (timer<=5){
+                speed = 50;
+            }else{
+                speed = 150;
+                stoptimer = false;
+            }
+        }
         if(direction == 0 && x < Config.WINDOW_WIDTH-width-18){
             x = x + speed*dt;
         }
         if(direction == 2 && x > 0){
             x = x - speed*dt;
         }
-
         if(x < 0){
             x = 0;
         }
-
-
     }
 
-    @Override
     public void keyPressed(int key) {
         if(key == keyToGoLeft){
             direction = 2;
@@ -91,7 +95,6 @@ public class Player extends InteractiveGraphicalObject {
         }
     }
 
-    @Override
     public void keyReleased(int key) {
         if(key == keyToGoLeft){
             direction = -1;
@@ -104,6 +107,7 @@ public class Player extends InteractiveGraphicalObject {
     public void boost(){
         haa = true;
     }
+    public void stop(){ stoptimer = true;}
 
     public void randomx(){ x = Math.random()*960;}
 }
