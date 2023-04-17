@@ -22,4 +22,6 @@ public class Fruit extends InteractiveGraphicalObject {
     }
 
     public void jumpBack(){}
+
+    public boolean checkAndHandleCollision(Player player){return this.collidesWith(player);}
 }

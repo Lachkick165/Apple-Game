@@ -17,10 +17,12 @@ public class Player extends InteractiveGraphicalObject {
     private boolean haa2;
     private boolean stoptimer;
     private double timer;
+    private double speedx;
 
-    public Player(double x, double y){
+    public Player(double x, double y, double speedx, int keyToGoLeft, int keyToGoRight){
         this.x = x;
         this.y = y;
+        this.speedx = speedx;
 
         speed = 150;
 
@@ -31,8 +33,8 @@ public class Player extends InteractiveGraphicalObject {
         stoptimer = false;
         timer = 0;
 
-        this.keyToGoLeft    = KeyEvent.VK_A;
-        this.keyToGoRight   = KeyEvent.VK_D;
+        this.keyToGoLeft    = keyToGoLeft;
+        this.keyToGoRight   = keyToGoRight;
         this.direction      = -1;
     }
 
@@ -42,7 +44,7 @@ public class Player extends InteractiveGraphicalObject {
         drawTool.setCurrentColor(0,0,0,255);
         drawTool.drawRectangle(x,y,width,height);
         drawTool.setCurrentColor(Color.white);
-        drawTool.drawText(0, 20, "Speed "+ speed);
+        drawTool.drawText(speedx, 20, "Speed: "+ (int)speed);
     }
 
     public void update(double dt) {
